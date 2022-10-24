@@ -1,7 +1,15 @@
+import random
 from aiogram import types, Dispatcher
 from config import bot, dp, ADMINS
 from Database.bot_db import sql_command_all
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.dispatcher.filters import Text
+
+async def game(message: types.Message):
+    if message.from_user.id in ADMINS:
+        await bot.send_dice(message.chat.id, emoji=random.choice(['🎰', '🎳', '🎯', '⚽', '🏀', '🎲']))
+    else:
+        await message.answer('Ты не админ')
 
 
 async def delete_data(message: types.Message):
@@ -21,4 +29,5 @@ async def delete_data(message: types.Message):
 
 
 def register_handlers_ADMIN(dp: Dispatcher):
+    dp.register_message_handler(game, Text(startswith='game'))
     dp.register_message_handler(delete_data, commands=['del'])

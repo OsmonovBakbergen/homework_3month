@@ -1,7 +1,7 @@
 from aiogram import types, Dispatcher
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from config import bot, dp
-from database.bot_db import sql_command_random
+from Database.bot_db import sql_command_random
 
 
 async def start_command(message: types.Message):
